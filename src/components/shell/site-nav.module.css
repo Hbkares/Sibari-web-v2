@@ -1,0 +1,22 @@
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  padding: 1rem clamp(1.5rem, 6vw, 6rem);
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  background: color-mix(in srgb, var(--background) 80%, transparent);
+  backdrop-filter: blur(6px);
+}
+
+.link {
+  opacity: 0.75;
+}
+
+.link:hover,
+.link:focus-visible {
+  opacity: 1;
+}

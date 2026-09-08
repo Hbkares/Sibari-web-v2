@@ -1,30 +1,76 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Space_Grotesk, Inter } from "next/font/google";
 import "./globals.css";
 import { ScrollProvider } from "@/lib/motion/scroll-provider";
 import { LazySceneCanvas } from "@/components/experience/lazy-scene-canvas";
+import { Scene } from "@/components/experience/scene";
+import { SiteNav } from "@/components/shell/site-nav";
+import { DeviceTierProvider } from "@/lib/device/device-tier-provider";
+import { JsonLd } from "@/components/seo/json-ld";
+import { musicGroupJsonLd } from "@/lib/seo/structured-data";
+import { siteConfig } from "@/lib/seo/site-config";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: "SIBARI",
-  description: "SIBARI",
+  metadataBase: new URL(siteConfig.url),
+  title: {
+    default: `${siteConfig.name} — ${siteConfig.tagline}`,
+    template: `%s | ${siteConfig.name}`,
+  },
+  description: siteConfig.description,
+  keywords: [siteConfig.name, siteConfig.artistName, siteConfig.genre, "DJ", "music producer", "Paris"],
+  applicationName: siteConfig.name,
+  alternates: { canonical: siteConfig.url },
+  robots: { index: true, follow: true },
+  openGraph: {
+    type: "website",
+    url: siteConfig.url,
+    siteName: siteConfig.name,
+    title: siteConfig.name,
+    description: siteConfig.description,
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteConfig.name,
+    description: siteConfig.description,
+    creator: "@hbkares",
+  },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  // Fills notch/home-indicator safe areas on iOS instead of letterboxing —
+  // paired with the safe-area padding in globals.css.
+  viewportFit: "cover",
+  themeColor: siteConfig.palette.black,
+  colorScheme: "dark",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
+    <html lang="en" className={`${spaceGrotesk.variable} ${inter.variable}`}>
       <body>
-        <LazySceneCanvas />
-        <ScrollProvider>{children}</ScrollProvider>
+        <JsonLd data={musicGroupJsonLd()} />
+        <DeviceTierProvider>
+          <LazySceneCanvas>
+            <Scene />
+          </LazySceneCanvas>
+          <ScrollProvider>
+            <SiteNav />
+            {children}
+          </ScrollProvider>
+        </DeviceTierProvider>
       </body>
     </html>
   );

@@ -17,12 +17,34 @@ the 3D scene.
 - **Lenis + GSAP ScrollTrigger** — `src/lib/motion/scroll-provider.tsx`
   exposes the shared Lenis instance via a ref-based context so both DOM
   sections and the 3D layer read the same scroll source.
-- **CMS**: not yet wired — pending the Content Architect's schema.
+- **CMS**: [Sanity](https://www.sanity.io/), per the Content Architect's
+  schema (SIB-4) — `src/lib/sanity/` holds the query layer. `sanityFetch`
+  (`src/lib/sanity/fetch.ts`) hits the Sanity Query API directly with
+  `fetch` so Next's request memoization/ISR apply, and returns `null`
+  when the project isn't configured, which every room treats as an
+  empty state rather than a build failure. **No Sanity project exists
+  yet** — copy `.env.example` to `.env.local` and fill in
+  `NEXT_PUBLIC_SANITY_PROJECT_ID` once one is provisioned.
+
+## Room structure
+
+The site is routed as the room sequence from the concept (`src/lib/rooms.ts`):
+Home (`/`) → Universe (`/universe`) → Releases (`/releases`) → Selected
+Tracks (`/tracks`) → Visuals (`/visuals`) → Story (`/story`) → Contact
+(`/contact`). Each room is a real route under `src/app/`, server-rendered
+with semantic HTML per room per plan §3.1 — this exists independently of
+whether the WebGL layer loads, so search engines and no-JS visitors still
+get real content. `src/components/rooms/room.tsx` is the shared
+`<section>`/`<h1>` shell every room uses; `RoomFooterNav` links each room
+to its neighbors. The 3D layer's continuous camera movement between rooms
+(SIB-9) is a progressive enhancement on top of this route graph, not a
+replacement for it.
 
 ## Getting started
 
 ```bash
 npm install
+cp .env.example .env.local   # fill in Sanity credentials once provisioned
 npm run dev
 ```
 
