@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { siteConfig } from "@/lib/seo/site-config";
 import { LandingHero } from "@/components/sections/landing-hero";
+import { RemakesSection } from "@/components/remakes/remakes-section";
 import { SectionStub } from "@/components/sections/section-stub";
 
 const PAGE_DESCRIPTION =
@@ -25,8 +26,8 @@ export const metadata: Metadata = {
 
 /**
  * Single continuous-scroll shell (SIB-25): Landing → Music → Remakes →
- * About → Contact. Landing is fully built here; the other four are
- * anchor/pacing stubs for their owning issues (SIB-26, SIB-27/33, SIB-31)
+ * About → Contact. Landing and Remakes are fully built here; Music/About/
+ * Contact are anchor/pacing stubs for their owning issues (SIB-26, SIB-31)
  * to fill in.
  */
 export default function HomePage() {
@@ -34,7 +35,7 @@ export default function HomePage() {
     <main>
       <LandingHero />
       <SectionStub id="music" heading="Music" />
-      <SectionStub id="remakes" heading="Remakes" />
+      <RemakesSection />
       <SectionStub id="about" heading="About" />
       <SectionStub id="contact" heading="Contact" />
     </main>

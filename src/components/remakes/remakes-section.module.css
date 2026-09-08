@@ -1,0 +1,27 @@
+.section {
+  padding-block: clamp(4rem, 10vw, 8rem);
+}
+
+.header {
+  padding: 0 clamp(1.5rem, 6vw, 6rem);
+  margin-bottom: clamp(2rem, 5vw, 3rem);
+}
+
+.eyebrow {
+  font-family: var(--font-display);
+  color: var(--sib-gold);
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.heading {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  letter-spacing: -0.01em;
+}
+
+.empty {
+  padding: 0 clamp(1.5rem, 6vw, 6rem);
+  opacity: 0.6;
+}

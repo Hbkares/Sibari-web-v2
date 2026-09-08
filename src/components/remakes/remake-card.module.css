@@ -1,0 +1,132 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: inherit;
+  font: inherit;
+}
+
+.card:focus-visible {
+  outline: 2px solid var(--sib-gold);
+  outline-offset: 6px;
+}
+
+@media (min-width: 640px) {
+  .featured {
+    grid-column: span 2;
+  }
+}
+
+@media (min-width: 1024px) {
+  .featured {
+    grid-row: span 2;
+  }
+
+  .featured .title {
+    font-size: 1.15rem;
+  }
+}
+
+.thumbWrap {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--sib-black) 70%, white);
+}
+
+.featured .thumbWrap {
+  aspect-ratio: 16 / 9;
+}
+
+@media (min-width: 1024px) {
+  .featured .thumbWrap {
+    aspect-ratio: 16 / 11;
+  }
+}
+
+.thumb {
+  object-fit: cover;
+  /* Graded/desaturated at rest so wildly varying source quality still reads
+     as "the same world," not a scraped YouTube feed (SIB-27 §3). */
+  filter: grayscale(0.85) saturate(0.3) contrast(1.05);
+  transition: filter 0.4s ease-out;
+}
+
+.card:hover .thumb,
+.card:focus-visible .thumb {
+  filter: grayscale(0) saturate(1) contrast(1);
+}
+
+.playMark {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
+}
+
+.card:hover .playMark,
+.card:focus-visible .playMark {
+  opacity: 1;
+}
+
+.playRing {
+  width: 3rem;
+  height: 3rem;
+  fill: none;
+  stroke: var(--sib-gold);
+  stroke-width: 1.5;
+}
+
+.playRing path {
+  fill: var(--sib-gold);
+  stroke: none;
+}
+
+.duration {
+  position: absolute;
+  right: 0.5rem;
+  bottom: 0.5rem;
+  padding: 0.15rem 0.4rem;
+  background: color-mix(in srgb, var(--sib-black) 75%, transparent);
+  color: var(--sib-off-white);
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+}
+
+.meta {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.index {
+  font-family: var(--font-display);
+  color: var(--sib-gold);
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+.title {
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--sib-off-white);
+}
+
+.flpTag {
+  border: 1px solid var(--sib-gold);
+  color: var(--sib-gold);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  padding: 0.1rem 0.35rem;
+}
