@@ -1,0 +1,89 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2rem, 6vw, 3rem);
+  padding: clamp(4rem, 12vw, 6rem) clamp(1.5rem, 6vw, 6rem) clamp(2rem, 6vw, 3rem);
+  background: var(--sib-black);
+}
+
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--foreground);
+  opacity: 0.6;
+  margin-bottom: 1rem;
+}
+
+.headline {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 4vw, 3rem);
+  line-height: 1.15;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.body {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  max-width: 65ch;
+  opacity: 0.85;
+  margin-bottom: 2rem;
+}
+
+.primaryCta {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 3vw, 2rem);
+  color: var(--sib-gold);
+  border-bottom: 1px solid transparent;
+}
+
+.primaryCta:hover,
+.primaryCta:focus-visible {
+  color: var(--sib-gold-highlight);
+  border-bottom-color: currentColor;
+}
+
+.secondaryList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.25rem;
+  list-style: none;
+  margin-top: 2rem;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+}
+
+.secondaryLink {
+  opacity: 0.75;
+}
+
+.secondaryLink:hover,
+.secondaryLink:focus-visible {
+  opacity: 1;
+}
+
+.footer {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  padding-top: clamp(2rem, 6vw, 3rem);
+  border-top: 1px solid color-mix(in srgb, var(--foreground) 15%, transparent);
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+}
+
+.mark {
+  letter-spacing: 0.1em;
+  opacity: 0.6;
+}
+
+.copyright {
+  opacity: 0.5;
+}

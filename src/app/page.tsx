@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import { siteConfig } from "@/lib/seo/site-config";
 import { LandingHero } from "@/components/sections/landing-hero";
+import { MusicSection } from "@/components/music/music-section";
 import { RemakesSection } from "@/components/remakes/remakes-section";
-import { SectionStub } from "@/components/sections/section-stub";
+import { AboutSection } from "@/components/sections/about-section";
+import { ContactSection } from "@/components/sections/contact-section";
 
 const PAGE_DESCRIPTION =
-  "Sibari — Paris-based progressive house producer and DJ.";
+  "Sibari — Paris-based progressive house producer and DJ. Stream the full catalog, watch FL Studio remakes, and get in touch for bookings.";
 
 export const metadata: Metadata = {
   title: siteConfig.name,
@@ -26,18 +28,16 @@ export const metadata: Metadata = {
 
 /**
  * Single continuous-scroll shell (SIB-25): Landing → Music → Remakes →
- * About → Contact. Landing and Remakes are fully built here; Music/About/
- * Contact are anchor/pacing stubs for their owning issues (SIB-26, SIB-31)
- * to fill in.
+ * About → Contact. All five sections are built and wired in.
  */
 export default function HomePage() {
   return (
     <main>
       <LandingHero />
-      <SectionStub id="music" heading="Music" />
+      <MusicSection />
       <RemakesSection />
-      <SectionStub id="about" heading="About" />
-      <SectionStub id="contact" heading="Contact" />
+      <AboutSection />
+      <ContactSection />
     </main>
   );
 }

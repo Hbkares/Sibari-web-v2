@@ -1,4 +1,6 @@
 import { getRemakes } from "@/lib/youtube/fetch";
+import { remakesJsonLd } from "@/lib/seo/structured-data";
+import { JsonLd } from "@/components/seo/json-ld";
 import { RemakesGrid } from "./remakes-grid";
 import styles from "./remakes-section.module.css";
 
@@ -25,7 +27,10 @@ export async function RemakesSection() {
         </h2>
       </div>
       {remakes.length > 0 ? (
-        <RemakesGrid remakes={remakes} />
+        <>
+          <JsonLd data={remakesJsonLd(remakes)} />
+          <RemakesGrid remakes={remakes} />
+        </>
       ) : (
         // Renders instead of failing the build when YOUTUBE_API_KEY isn't
         // set yet, or the playlist is temporarily empty — same contract as

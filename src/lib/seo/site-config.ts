@@ -9,6 +9,12 @@ export const siteConfig = {
   url: rawSiteUrl.replace(/\/+$/, ""),
   description:
     "Sibari is a Paris-based electronic music producer and DJ, active since 2011, known for a progressive house sound influenced by Avicii and Swedish House Mafia.",
+  // Fuller narrative for the About section and JSON-LD `description` — kept
+  // separate from `description` above, which stays short for the <meta
+  // name="description"> tag (SIB-29). Single source of truth so the two
+  // never drift apart.
+  bio: "Sibari is a producer and DJ based in Paris, active since 2011 — formerly performing as Hbkares. His sound is melodic, energetic progressive house, built in the festival lineage of Avicii and Swedish House Mafia and sharpened across more than a decade of releases, collaborations, and sets.",
+  foundingDate: "2011",
   genre: "Progressive House",
   palette: {
     black: "#0A0A0A",
