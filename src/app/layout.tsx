@@ -3,6 +3,7 @@ import { Space_Grotesk, Inter } from "next/font/google";
 import "./globals.css";
 import { ScrollProvider } from "@/lib/motion/scroll-provider";
 import { SiteNav } from "@/components/shell/site-nav";
+import { SiteSidebar } from "@/components/shell/site-sidebar";
 import { DeviceTierProvider } from "@/lib/device/device-tier-provider";
 import { JsonLd } from "@/components/seo/json-ld";
 import { musicGroupJsonLd } from "@/lib/seo/structured-data";
@@ -63,6 +64,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <DeviceTierProvider>
           <ScrollProvider>
             <SiteNav />
+            <SiteSidebar />
             {children}
           </ScrollProvider>
         </DeviceTierProvider>

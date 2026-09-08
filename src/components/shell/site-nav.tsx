@@ -3,9 +3,9 @@ import { siteConfig } from "@/lib/seo/site-config";
 import styles from "./site-nav.module.css";
 
 /**
- * App-shell nav placeholder. The room-sequence nav it used to render was
- * removed with the 3D rooms experience (SIB-24) — the follow-up single-
- * scroll shell/landing task defines what replaces it.
+ * Sticky wordmark for the single-scroll shell (SIB-25). The room-sequence
+ * nav this used to render was removed with the 3D rooms experience
+ * (SIB-24); social links now live in the fixed `SiteSidebar` instead.
  */
 export function SiteNav() {
   return (

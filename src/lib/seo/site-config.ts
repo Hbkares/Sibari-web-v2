@@ -28,3 +28,14 @@ export const siteConfig = {
 } as const;
 
 export const sameAsLinks: string[] = Object.values(siteConfig.socials);
+
+/**
+ * SIB-25 fixed sidebar shows only these four (per issue spec) even though
+ * `siteConfig.socials` carries more — order matches the spec's listing.
+ */
+export const sidebarSocials = [
+  { key: "instagram", label: "Instagram", href: siteConfig.socials.instagram },
+  { key: "spotify", label: "Spotify", href: siteConfig.socials.spotify },
+  { key: "soundcloud", label: "SoundCloud", href: siteConfig.socials.soundcloud },
+  { key: "youtube", label: "YouTube", href: siteConfig.socials.youtube },
+] as const;

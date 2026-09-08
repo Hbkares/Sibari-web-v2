@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { siteConfig } from "@/lib/seo/site-config";
+import { LandingHero } from "@/components/sections/landing-hero";
+import { SectionStub } from "@/components/sections/section-stub";
 
 const PAGE_DESCRIPTION =
   "Sibari — Paris-based progressive house producer and DJ.";
@@ -22,15 +24,19 @@ export const metadata: Metadata = {
 };
 
 /**
- * Placeholder shell — the single-scroll landing page lands in the follow-up
- * task on top of this. Kept intentionally bare so the app shell/CI/device-
- * tiering scaffolding stays exercisable in the meantime.
+ * Single continuous-scroll shell (SIB-25): Landing → Music → Remakes →
+ * About → Contact. Landing is fully built here; the other four are
+ * anchor/pacing stubs for their owning issues (SIB-26, SIB-27/33, SIB-31)
+ * to fill in.
  */
 export default function HomePage() {
   return (
     <main>
-      <h1>{siteConfig.name}</h1>
-      <p>{siteConfig.tagline}</p>
+      <LandingHero />
+      <SectionStub id="music" heading="Music" />
+      <SectionStub id="remakes" heading="Remakes" />
+      <SectionStub id="about" heading="About" />
+      <SectionStub id="contact" heading="Contact" />
     </main>
   );
 }
