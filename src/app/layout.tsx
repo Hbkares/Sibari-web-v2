@@ -2,8 +2,6 @@ import type { Metadata, Viewport } from "next";
 import { Space_Grotesk, Inter } from "next/font/google";
 import "./globals.css";
 import { ScrollProvider } from "@/lib/motion/scroll-provider";
-import { LazySceneCanvas } from "@/components/experience/lazy-scene-canvas";
-import { Scene } from "@/components/experience/scene";
 import { SiteNav } from "@/components/shell/site-nav";
 import { DeviceTierProvider } from "@/lib/device/device-tier-provider";
 import { JsonLd } from "@/components/seo/json-ld";
@@ -63,9 +61,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body>
         <JsonLd data={musicGroupJsonLd()} />
         <DeviceTierProvider>
-          <LazySceneCanvas>
-            <Scene />
-          </LazySceneCanvas>
           <ScrollProvider>
             <SiteNav />
             {children}

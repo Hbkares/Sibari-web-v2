@@ -1,50 +1,29 @@
 # SIBARI — Web
 
-Next.js (App Router) app shell for the SIBARI artist site. Next.js owns
-structure/SEO/routing; pages hydrate into a custom WebGL layer built on
-Three.js / React Three Fiber. Lenis (smooth scroll) + GSAP ScrollTrigger are
-the single source of truth for scroll/timeline state across both the DOM and
-the 3D scene.
+Next.js (App Router) app shell for the SIBARI artist site.
+
+The 3D WebGL rooms experience and the Sanity-driven room content layer
+(SIB-8/SIB-9/SIB-4) have been removed (SIB-24) — this repo is now the
+foundation for a new single-scroll site, landed in a follow-up task. What's
+kept from that earlier iteration:
 
 ## Stack
 
 - **Next.js 16** (App Router, TypeScript)
-- **Three.js** via `@react-three/fiber` — mounted through
-  `src/components/experience/lazy-scene-canvas.tsx`, which code-splits the
-  WebGL bundle out of the critical path (`next/dynamic`, `ssr: false`).
-  The scene graph itself is the Creative Technologist's ownership boundary —
-  don't add scene content to `scene-canvas.tsx` directly.
 - **Lenis + GSAP ScrollTrigger** — `src/lib/motion/scroll-provider.tsx`
-  exposes the shared Lenis instance via a ref-based context so both DOM
-  sections and the 3D layer read the same scroll source.
-- **CMS**: [Sanity](https://www.sanity.io/), per the Content Architect's
-  schema (SIB-4) — `src/lib/sanity/` holds the query layer. `sanityFetch`
-  (`src/lib/sanity/fetch.ts`) hits the Sanity Query API directly with
-  `fetch` so Next's request memoization/ISR apply, and returns `null`
-  when the project isn't configured, which every room treats as an
-  empty state rather than a build failure. **No Sanity project exists
-  yet** — copy `.env.example` to `.env.local` and fill in
-  `NEXT_PUBLIC_SANITY_PROJECT_ID` once one is provisioned.
-
-## Room structure
-
-The site is routed as the room sequence from the concept (`src/lib/rooms.ts`):
-Home (`/`) → Universe (`/universe`) → Releases (`/releases`) → Selected
-Tracks (`/tracks`) → Visuals (`/visuals`) → Story (`/story`) → Contact
-(`/contact`). Each room is a real route under `src/app/`, server-rendered
-with semantic HTML per room per plan §3.1 — this exists independently of
-whether the WebGL layer loads, so search engines and no-JS visitors still
-get real content. `src/components/rooms/room.tsx` is the shared
-`<section>`/`<h1>` shell every room uses; `RoomFooterNav` links each room
-to its neighbors. The 3D layer's continuous camera movement between rooms
-(SIB-9) is a progressive enhancement on top of this route graph, not a
-replacement for it.
+  exposes a shared Lenis instance via a ref-based context, the scroll/
+  timeline source of truth for whatever DOM sections land next.
+- **Device tiering** — `src/lib/device/` derives a render/motion budget
+  (`mobile`/`tablet`/`desktop` × `low`/`medium`/`high`) from input
+  capability and GPU signals, exposed via `DeviceTierProvider`. No WebGL
+  layer currently consumes it, but the scroll layer already does
+  (`prefersReducedMotion`, `isTouch`).
 
 ## Getting started
 
 ```bash
 npm install
-cp .env.example .env.local   # fill in Sanity credentials once provisioned
+cp .env.example .env.local
 npm run dev
 ```
 

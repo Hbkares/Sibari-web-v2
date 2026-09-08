@@ -18,7 +18,7 @@ export interface RenderBudget {
   particleMultiplier: number;
   shadows: boolean;
   shaderQuality: ShaderQuality;
-  /** Max long-edge px a streamed texture should request at this tier (see src/lib/assets/tiered-image.ts). */
+  /** Max long-edge px a streamed texture should request at this tier. */
   textureResolutionCap: number;
   /** LOD/subdivision level scene geometry should request at this tier (e.g. icosahedronGeometry's detail arg, or which pre-baked glTF LOD to fetch once real models land). */
   geometryDetail: number;
@@ -95,9 +95,8 @@ const LOW_END_GPU_PATTERN =
   /swiftshader|software rasterizer|llvmpipe|microsoft basic render|mali-4|mali-3|powervr sgx|adreno (2|3)0[0-9]/i;
 
 /**
- * Best-effort GPU capability read via WEBGL_debug_renderer_info. Deliberately
- * separate from supportsWebGL() (src/lib/webgl-support.ts), which only checks
- * whether a context can be created at all — this checks how capable it is.
+ * Best-effort GPU capability read via WEBGL_debug_renderer_info — checks how
+ * capable a context is, not merely whether one can be created at all.
  */
 function detectLowEndGpu(): boolean {
   try {

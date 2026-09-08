@@ -1,20 +1,18 @@
 import Link from "next/link";
-import { ROOMS } from "@/lib/rooms";
+import { siteConfig } from "@/lib/seo/site-config";
 import styles from "./site-nav.module.css";
 
 /**
- * Persistent, real `<nav>` across every room — the app-shell-level
- * counterpart to the WebGL layer's continuous camera movement (SIB-9).
- * Server-rendered so crawlers and no-JS visitors get the full room graph.
+ * App-shell nav placeholder. The room-sequence nav it used to render was
+ * removed with the 3D rooms experience (SIB-24) — the follow-up single-
+ * scroll shell/landing task defines what replaces it.
  */
 export function SiteNav() {
   return (
-    <nav className={styles.nav} aria-label="Rooms">
-      {ROOMS.map((room) => (
-        <Link key={room.slug} href={room.slug} className={styles.link}>
-          {room.label}
-        </Link>
-      ))}
+    <nav className={styles.nav} aria-label="Primary">
+      <Link href="/" className={styles.link}>
+        {siteConfig.name}
+      </Link>
     </nav>
   );
 }
