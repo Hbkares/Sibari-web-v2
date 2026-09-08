@@ -1,5 +1,6 @@
 "use client";
 
+import { preload } from "react-dom";
 import { useDeviceProfile } from "@/lib/device/device-tier-provider";
 import { siteConfig } from "@/lib/seo/site-config";
 import styles from "./landing-hero.module.css";
@@ -15,6 +16,11 @@ const VIDEO_POSTER = "/media/ci-vid-poster.jpg";
 export function LandingHero() {
   const { prefersReducedMotion } = useDeviceProfile();
 
+  // LCP candidate (SIB-35): the browser's preload scanner otherwise ranks
+  // this behind the two font preloads already in <head>, so it needs an
+  // explicit high-priority hint to win that race.
+  preload(VIDEO_POSTER, { as: "image", fetchPriority: "high" });
+
   return (
     <section id="landing" className={styles.hero} aria-label="Landing">
       <h1 className={styles.srOnly}>
@@ -23,7 +29,13 @@ export function LandingHero() {
       {prefersReducedMotion ? (
         // Decorative, fixed local asset — next/image's runtime cost isn't worth it here.
         // eslint-disable-next-line @next/next/no-img-element
-        <img src={VIDEO_POSTER} alt="" className={styles.media} draggable={false} />
+        <img
+          src={VIDEO_POSTER}
+          alt=""
+          className={styles.media}
+          draggable={false}
+          fetchPriority="high"
+        />
       ) : (
         <video
           className={styles.media}
