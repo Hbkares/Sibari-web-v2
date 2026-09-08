@@ -1,17 +1,23 @@
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+  --sib-black: #0a0a0a;
+  --sib-gold: #c9a227;
+  --sib-gold-highlight: #f0d98b;
+  --sib-gold-shadow: #8b6914;
+  --sib-off-white: #e8e6e1;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --background: var(--sib-black);
+  --foreground: var(--sib-off-white);
+
+  --font-display: var(--font-space-grotesk);
+  --font-body: var(--font-inter);
 }
 
 html {
   height: 100%;
+  color-scheme: dark;
+  /* iOS Safari bumps font-size on rotation unless told not to — a common
+     mobile-only "text randomly resizes" bug that only shows up on-device. */
+  -webkit-text-size-adjust: 100%;
 }
 
 html,
@@ -26,9 +32,14 @@ body {
   flex-direction: column;
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body), Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* viewport-fit=cover (layout.tsx) extends content under the iOS notch/
+     home-indicator; without this it sits behind them instead. */
+  padding: env(safe-area-inset-top) env(safe-area-inset-right)
+    env(safe-area-inset-bottom) env(safe-area-inset-left);
+  -webkit-tap-highlight-color: transparent;
 }
 
 * {
@@ -40,10 +51,8 @@ body {
 a {
   color: inherit;
   text-decoration: none;
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+  /* Skips the ~300ms tap delay browsers use to disambiguate double-tap-to-
+     zoom from a single tap — links should feel touch-native, not desktop-
+     ported. */
+  touch-action: manipulation;
 }

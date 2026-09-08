@@ -29,4 +29,7 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
-      - run: npx lhci autorun
+      - name: Lighthouse CI (desktop)
+        run: npx lhci autorun --config=lighthouserc.json
+      - name: Lighthouse CI (mobile)
+        run: npx lhci autorun --config=lighthouserc.mobile.json

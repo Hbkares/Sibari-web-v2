@@ -7,7 +7,7 @@
       "url": ["http://localhost:3000/"],
       "numberOfRuns": 3,
       "settings": {
-        "preset": "desktop"
+        "throttlingMethod": "simulate"
       }
     },
     "assert": {
@@ -25,7 +25,7 @@
     },
     "upload": {
       "target": "filesystem",
-      "outputDir": ".lighthouseci/desktop"
+      "outputDir": ".lighthouseci/mobile"
     }
   }
 }
